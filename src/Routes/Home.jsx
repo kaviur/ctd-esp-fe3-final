@@ -6,7 +6,7 @@ import Card from '../Components/Card'
 const Home = () => {
   return (
     <main className="" >
-      <div className='card-grid'>
+      <div className='flex flex-wrap gap-4 px-6 justify-center'>
         {/* Aqui deberias renderizar las cards */}
         <Card name={"juan"} username={"Este"} id={126355} />
         <Card name={"ewew"} username={"wewhh"} id={14263} />
