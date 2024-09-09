@@ -9,8 +9,7 @@ a:focus .favorite-trigger {
 a .favorite-trigger {
   display: block;
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+
 
   font-variant: none;
   text-decoration: none;

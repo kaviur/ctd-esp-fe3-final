@@ -16,10 +16,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-300 bg-opacity-80 mb-6">
+    <div className="navbar bg-base-300 bg-opacity-80 mb-6 px-4">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="btn btn-ghost sm:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -40,11 +40,11 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link to={"contact"}>Contacto</Link>
+              <Link to={"home"}>Home</Link>
             </li>
 
             <li>
-              <Link to={"contact"}>Contact</Link>
+              <Link to={"contact"}>Contacto</Link>
             </li>
 
             <li>
@@ -54,8 +54,8 @@ const Navbar = () => {
         </div>
         <a href="/" className="btn btn-ghost text-xl">daisyUI</a>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+      <div className="navbar-center hidden sm:flex">
+        <ul className="menu menu-horizontal gap-2 px-1">
           <li>
             <Link to={"home"}>Home</Link>
           </li>
@@ -69,8 +69,8 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
-        <label className="swap swap-rotate">
+      <div className="navbar-end mr-2">
+        <label className="swap swap-rotate btn btn-ghost">
           {/* this hidden checkbox controls the state */}
           <input
             type="checkbox"
