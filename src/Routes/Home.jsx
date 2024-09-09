@@ -6,12 +6,16 @@ import Card from '../Components/Card'
 const Home = () => {
   return (
     <main className="" >
-      <h1>Home</h1>
       <div className='card-grid'>
         {/* Aqui deberias renderizar las cards */}
+        <Card name={"juan"} username={"Este"} id={126355} />
+        <Card name={"ewew"} username={"wewhh"} id={14263} />
+        <Card name={"fwfwf"} username={"hghgh"} id={162553} />
+
       </div>
     </main>
   )
 }
+
 
 export default Home

@@ -15,12 +15,13 @@ const Card = ({ name, username, id }) => {
     dispatch({ type: "ADD_TO_FAVS", payload: dentist });
   };
   return (
-    <div className="card">
-      <div className="card bg-base-100 w-96 shadow-xl">
+    <div className="card ">
+      <div className="card bg-base-300 w-96 shadow-xl">
         <figure>
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes"
+            className="w-80"
+            src="https://images.vexels.com/media/users/3/309133/isolated/preview/97e3ca4eab81a1dffa2c58682690391a-un-dentista-sosteniendo-una-sonda-dental.png"
+            alt="dentista"
           />
         </figure>
         <div className="card-body">
@@ -33,7 +34,9 @@ const Card = ({ name, username, id }) => {
               Ver detalles
             </Link>
             {/* Botón para agregar a favoritos */}
-            <HeartButton patientId={id} />
+            <button className="btn btn-ghost relative" onClick={addFav}>
+            <HeartButton  patientId={id} />
+            </button>
           </div>
         </div>
       </div>

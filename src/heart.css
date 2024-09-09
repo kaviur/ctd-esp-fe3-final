@@ -1,7 +1,5 @@
 
-a {
-  position: relative;
-}
+
 a:focus {
   outline: 0;
 }
