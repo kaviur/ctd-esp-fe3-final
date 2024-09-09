@@ -43,6 +43,12 @@
       .catch(error => console.error(error));
   }, []);
 
+    // Cargar los favoritos desde localStorage cuando se monta el proveedor
+    useEffect(() => {
+      const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      dispatch({ type: "SET_FAVORITES", payload: savedFavorites });
+    }, []);
+
     const contextValue = useMemo(() => {
       return { state, dispatch };
     }, [state]);
