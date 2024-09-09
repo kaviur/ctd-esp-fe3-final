@@ -55,7 +55,7 @@ const Navbar = () => {
         <a href="/" className="btn btn-ghost text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden sm:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal gap-2 px-1">
           <li>
             <Link to={"home"}>Home</Link>
           </li>

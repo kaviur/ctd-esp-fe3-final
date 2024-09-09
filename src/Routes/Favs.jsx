@@ -12,17 +12,14 @@ const DentistCard = ({ dentist }) => {
   };
 };
 
-
 const Favs = () => {
-
   return (
-    <>
-      <h1>Dentists Favs</h1>
-      <div className="card-grid">
-        {/* este componente debe consumir los destacados del localStorage */}
-        {/* Deberan renderizar una Card por cada uno de ellos */}
-      </div>
-    </>
+    <div className="flex flex-wrap gap-4 px-6 justify-center">
+      {/* Aqui deberias renderizar las cards */}
+      <Card name={"juan"} username={"Este"} id={126355} />
+      <Card name={"ewew"} username={"wewhh"} id={14263} />
+      <Card name={"fwfwf"} username={"hghgh"} id={162553} />
+    </div>
   );
 };
 
