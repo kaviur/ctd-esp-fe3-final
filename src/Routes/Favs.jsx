@@ -2,10 +2,10 @@ import React from "react";
 import Card from "../Components/Card";
 
 import { useContext } from "react";
-import { ContextGlobal } from "../Components/utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const DentistCard = ({ dentist }) => {
-  const { dispatch } = useContext(ContextGlobal);
+  const { dispatch } = useGlobalContext();
 
   const handleAddToFavs = () => {
     dispatch({ type: "ADD_TO_FAVS", payload: dentist });
