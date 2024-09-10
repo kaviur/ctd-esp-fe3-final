@@ -5,6 +5,7 @@ import Contact from "./Routes/Contact";
 import Favs from "./Routes/Favs";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
+import PageNotFound from "./Routes/PageNotFound";
 
 function App() {
   return (
@@ -16,10 +17,13 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path={"/"} element={<Home />} />
+        <Route path={"/home"} element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/dentist/:id" element={<Detail />} />
         <Route path="/favs" element={<Favs />} />
+        <Route path="*" element={<PageNotFound />} />
+
       </Routes>
 
       <Footer />
