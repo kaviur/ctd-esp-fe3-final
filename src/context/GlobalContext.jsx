@@ -30,12 +30,7 @@ export const GlobalProvider = ({ children }) => {
     })();
   },[]);
 
-  // Cargar favoritos desde localStorage al montar el componente
-  useEffect(() => {
-    const savedFavs = JSON.parse(localStorage.getItem("favs")) || [];
-    dentistDispatch({ type: "SET_FAVORITES", payload: savedFavs });
-  },[]);
-  
+
   // Memoizar el valor del contexto para optimizar el rendimiento
   const contextValue = useMemo(() => ({
     themeState,
