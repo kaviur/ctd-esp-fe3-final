@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { ContextGlobal } from "./utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext";  // Actualiza la ruta y el nombre del contexto
 import { Link } from "react-router-dom";
 import "../index.css";
 import HeartButton from "./HeartButton";
 
 const Card = ({ name, username, id }) => {
-  const { dispatch } = useContext(ContextGlobal);
+  const { state, dispatch } = useGlobalContext();
 
   const addFav = () => {
     // Crear un objeto con la información del dentista
@@ -35,8 +35,8 @@ const Card = ({ name, username, id }) => {
               Ver detalles
             </Link>
             {/* Botón para agregar a favoritos */}
-            <button className=" btn-ghost relative" onClick={addFav}>
-            <HeartButton  patientId={id} />
+            <button className="btn-ghost relative" onClick={addFav}>
+              <HeartButton patientId={id} />
             </button>
           </div>
         </div>
