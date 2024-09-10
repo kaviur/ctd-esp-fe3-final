@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
-import { ContextGlobal } from "../Components/utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
-  const { state } = useContext(ContextGlobal); // Accede al contexto global
+  const { state } = useGlobalContext();
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
 
   useEffect(() => {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { ContextGlobal } from "../Components/utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext";
 
 // Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
   const { id } = useParams();
-  const { state } = useContext(ContextGlobal);
+  const { state } = useGlobalContext();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 

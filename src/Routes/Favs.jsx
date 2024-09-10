@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
-import { useContext } from "react";
-import { ContextGlobal } from "../Components/utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const Favs = () => {
-  const { state } = useContext(ContextGlobal);
+  const { state } = useGlobalContext();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
