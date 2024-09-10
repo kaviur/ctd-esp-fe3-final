@@ -15,11 +15,15 @@
         return { ...state, theme: action.payload };
       case "SET_DATA":
         return { ...state, data: action.payload };
-      case "ADD_TO_FAVS":
-        const updatedFavs = [...state.favs, action.payload];
-        localStorage.setItem("favs", JSON.stringify(updatedFavs));
+        case "TOGGLE_FAV":
+          const isFavorite = state.favs.some(fav => fav.id === action.payload.id);
+          const updatedFavs = isFavorite
+            ? state.favs.filter(fav => fav.id !== action.payload.id)  // Eliminar de favoritos
+            : [...state.favs, action.payload];  // Agregar a favoritos
+    
+          localStorage.setItem("favs", JSON.stringify(updatedFavs));
+          return { ...state, favs: updatedFavs };
 
-        return { ...state, favs: updatedFavs };
       default:
         return state;
     }
