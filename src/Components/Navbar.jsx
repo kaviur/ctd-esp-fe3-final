@@ -1,13 +1,13 @@
 import React from "react";
 import { useContext } from "react";
 import "../index.css";
-import { ContextGlobal } from "./utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext"; 
 import { Link } from "react-router-dom";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
-  const { state, dispatch } = useContext(ContextGlobal);
+  const { state, dispatch } = useGlobalContext();
 
   const toggleTheme = () => {
     const newTheme = state.theme === "nord" ? "night" : "nord";

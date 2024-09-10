@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { ContextGlobal } from "./utils/global.context";
+import { useGlobalContext } from "../context/GlobalContext"; 
 import { Link } from "react-router-dom";
 import "../index.css";
 import HeartButton from "./HeartButton";
 
 const Card = ({ name, username, id }) => {
-  const { dispatch } = useContext(ContextGlobal);
+  const { state, dispatch } = useGlobalContext();
 
   const addFav = () => {
     const dentist = { id, name, username };
