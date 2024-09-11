@@ -1,28 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { useGlobalContext } from "../context/GlobalContext";
-
+import { getData} from '../services/api';
+import UserDetails from "../Components/UserDetails";
 // Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
   const { id } = useParams();
-  const { state } = useGlobalContext();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Realizar el fetch para obtener los datos del usuario específico
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((response) => response.json())
+    getData(`/users/${id}`)
       .then((data) => {
-        setUser(data); // Guardar los datos del usuario en el estado
-
+        setUser(data);  
         setTimeout(() => {
           setLoading(false);
-        }, 2000);
+        }, 2000);  // Simular un delay
       })
       .catch((error) => {
         console.error("Error fetching user:", error);
-        setLoading(false); // En caso de error, quitar el loading inmediatamente
+        setLoading(false);  // En caso de error, quitar el loading inmediatamente
       });
   }, [id]);
 
@@ -48,46 +44,7 @@ const Detail = () => {
 
   return (
     <div className="overflow-x-auto flex gap-2">
-      {/* <h1 className=" text-base-content font-bold text-2xl mb-4 text-center">Paciente con el ID: {user.id}</h1> */}
-      <table className="table table-zebra w-96 mx-auto ">
-        <tbody>
-          <tr>
-            <td className="font-bold">ID</td>
-            <td>{user.id}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Nombre</td>
-            <td>{user.name}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Username</td>
-            <td>{user.username}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Email</td>
-            <td>{user.email}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Teléfono</td>
-            <td>{user.phone}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Website</td>
-            <td>{user.website}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Compañia</td>
-            <td>{user.company.name}</td>
-          </tr>
-          <tr>
-            <td className="font-bold">Dirección</td>
-            <td>
-              {user.address.street}, {user.address.suite}, {user.address.city},{" "}
-              {user.address.zipcode}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <UserDetails user={user} />
     </div>
   );
 };

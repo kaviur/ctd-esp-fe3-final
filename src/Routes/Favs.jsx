@@ -18,8 +18,6 @@ const Favs = () => {
   return (
     <>
       <div className="flex flex-wrap gap-4 px-6 justify-center">
-        {/* Aquí deberías renderizar las cards */}
-
         {loading ? (
           Array.from({ length: 10 }, (_, index) => (
             <div key={index} className="flex w-64 flex-col gap-4">

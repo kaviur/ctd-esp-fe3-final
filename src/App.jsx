@@ -23,7 +23,6 @@ function App() {
         <Route path="/dentist/:id" element={<Detail />} />
         <Route path="/favs" element={<Favs />} />
         <Route path="*" element={<PageNotFound />} />
-
       </Routes>
 
       <Footer />

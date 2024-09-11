@@ -1,6 +1,6 @@
 // src/context/GlobalContext.js
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from "react";
-import { getUsers } from '../services/api';
+import { getData } from '../services/api';
 import { themeReducer, initialStateTheme } from '../reducers/themeReducer';
 import { dentistReducer, initialStateDentist } from '../reducers/dentistReducer';
 
@@ -22,7 +22,7 @@ export const GlobalProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getUsers();  // Llamada a la API para obtener dentistas
+        const data = await getData("/users");  // Llamada a la API para obtener dentistas
         dentistDispatch({ type: "SET_DATA", payload: data });
       } catch (error) {
         console.error(error);
