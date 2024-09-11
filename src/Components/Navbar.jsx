@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
-  const { state, dispatch } = useGlobalContext();
+
+  const { themeState, themeDispatch } = useGlobalContext();
 
   const toggleTheme = () => {
-    const newTheme = state.theme === "nord" ? "night" : "nord";
-    dispatch({ type: "SET_THEME", payload: newTheme });
+    const newTheme = themeState.theme === "nord" ? "night" : "nord";
+    themeDispatch({ type: "SET_THEME", payload: newTheme });
     document.documentElement.setAttribute("data-theme", newTheme);
   };
 

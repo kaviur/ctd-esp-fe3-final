@@ -5,12 +5,15 @@ import "../index.css";
 import HeartButton from "./HeartButton";
 
 const Card = ({ name, username, id }) => {
-  const { state, dispatch } = useGlobalContext();
 
+  const { dentistState, dentistDispatch } = useGlobalContext();
+  
   const addFav = () => {
     const dentist = { id, name, username };
-    dispatch({ type: "TOGGLE_FAV", payload: dentist });
+    dentistDispatch({ type: "TOGGLE_FAV", payload: dentist });
   };
+  
+  const isFavorite = dentistState.favs.some(fav => fav.id === id);
 
   return (
     <>

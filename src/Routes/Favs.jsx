@@ -3,7 +3,8 @@ import Card from "../Components/Card";
 import { useGlobalContext } from "../context/GlobalContext";
 
 const Favs = () => {
-  const { state } = useGlobalContext();
+  // Asegúrate de que estás accediendo al estado correcto del contexto
+  const { dentistState } = useGlobalContext(); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,8 +18,6 @@ const Favs = () => {
   return (
     <>
       <div className="flex flex-wrap gap-4 px-6 justify-center">
-        {/* Aqui deberias renderizar las cards */}
-
         {loading ? (
           Array.from({ length: 10 }, (_, index) => (
             <div key={index} className="flex w-64 flex-col gap-4">
@@ -28,8 +27,8 @@ const Favs = () => {
               <div className="skeleton h-6 w-full"></div>
             </div>
           ))
-        ) : state.favs.length > 0 ? (
-          state.favs.map((dentist) => (
+        ) : dentistState.favs.length > 0 ? (
+          dentistState.favs.map((dentist) => (
             <Card
               key={dentist.id}
               name={dentist.name}
@@ -41,9 +40,9 @@ const Favs = () => {
           <p>No tienes favoritos guardados.</p>
         )}
       </div>
-
     </>
   );
 };
 
 export default Favs;
+
