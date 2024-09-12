@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import { useGlobalContext } from "../context/GlobalContext";
+import Swal from "sweetalert2"
 
 const Home = () => {
-  // Asegúrate de acceder al estado de dentistas y al tema
-  const { dentistState, themeState } = useGlobalContext(); 
+  const { dentistState, themeState, sortDentistsByName, filterByCity } = useGlobalContext(); 
+  const { data, filteredData, noDentistsFound } = dentistState; // Acceder a data y filteredData
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
 
+  const cities = [
+    "Gwenborough", 
+    "Wisokyburgh", 
+    "McKenziehaven", 
+    "Roscoeview", 
+    "South Christy", 
+    "New York", 
+    "Seattle"
+  ];
+
   useEffect(() => {
-    // Simular una carga con un setTimeout
     const timer = setTimeout(() => {
       setLoading(false); // Cambiar el estado de loading después de 1.5 segundos
     }, 1500);
@@ -16,10 +26,40 @@ const Home = () => {
     return () => clearTimeout(timer); // Limpiar el timeout si el componente se desmonta
   }, []);
 
+  const handleCityChange = (city) => {
+    filterByCity(city);
+  };
+
+  const displayData = filteredData.length > 0 || !filteredData ? filteredData : data;
+
+  useEffect(() => {
+    if (noDentistsFound) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No hay dentistas en esta ciudad',
+            showConfirmButton: false,
+            timer: 2000,
+        });
+    }
+  },[noDentistsFound]);
+
   return (
     <main className={themeState.theme === "dark" ? "dark" : "light"}>
       <div className="flex flex-wrap gap-4 px-6 justify-center">
-        {/* Aquí deberías renderizar las cards */}
+      
+        <button onClick={sortDentistsByName} className="btn btn-primary">
+          Ordenar por Nombre
+        </button>
+
+        <select onChange={(e) => handleCityChange(e.target.value)} className="select select-primary">
+          <option value="">Selecciona una ciudad</option>
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+
         {loading ? (
           Array.from({ length: 10 }, (_, index) => (
             <div key={index} className="flex w-64 flex-col gap-4">
@@ -29,8 +69,8 @@ const Home = () => {
               <div className="skeleton h-6 w-full"></div>
             </div>
           ))
-        ) : dentistState.data.length > 0 ? (
-          dentistState.data.map((dentist) => (
+        ) : displayData.length > 0 ? (
+          displayData.map((dentist) => (
             <Card
               key={dentist.id}
               name={dentist.name}
@@ -39,7 +79,7 @@ const Home = () => {
             />
           ))
         ) : (
-          <p>No hay dentistas para mostrar.</p>
+          <p>{noDentistsMessage || "No hay dentistas para mostrar."}</p>
         )}
       </div>
     </main>

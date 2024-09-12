@@ -30,6 +30,15 @@ export const GlobalProvider = ({ children }) => {
     })();
   },[]);
 
+  // Función para ordenar por nombre
+  const sortDentistsByName = () => {
+    dentistDispatch({ type: "SORT_BY_NAME" });
+  };
+
+  const filterByCity = (city) => {
+    dentistDispatch({ type: "FILTER_BY_CITY", payload: city });
+  };
+
 
   // Memoizar el valor del contexto para optimizar el rendimiento
   const contextValue = useMemo(() => ({
@@ -37,6 +46,8 @@ export const GlobalProvider = ({ children }) => {
     themeDispatch,
     dentistState,
     dentistDispatch,
+    sortDentistsByName,
+    filterByCity
   }),[themeState, dentistState]);
 
   return (
