@@ -6,6 +6,7 @@ import Favs from "./Routes/Favs";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import PageNotFound from "./Routes/PageNotFound";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/favs" element={<Favs />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-
+      <Toaster />
       <Footer />
     </div>
   );

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import { useGlobalContext } from "../context/GlobalContext";
-import Swal from "sweetalert2"
+import toast from "react-hot-toast";
 
 const Home = () => {
   const { dentistState, themeState, sortDentistsByName, filterByCity } = useGlobalContext(); 
-  const { data, filteredData, noDentistsFound } = dentistState; // Acceder a data y filteredData
-  const [loading, setLoading] = useState(true); // Estado para manejar el loading
+  const { data, filteredData, noDentistsFound } = dentistState; 
+  const [loading, setLoading] = useState(true); 
 
   const cities = [
     "Gwenborough", 
@@ -17,13 +17,13 @@ const Home = () => {
     "New York", 
     "Seattle"
   ];
-
+  const notify = () => toast('Here is your toast.');
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); // Cambiar el estado de loading después de 1.5 segundos
+      setLoading(false); 
     }, 1500);
 
-    return () => clearTimeout(timer); // Limpiar el timeout si el componente se desmonta
+    return () => clearTimeout(timer); 
   }, []);
 
   const handleCityChange = (city) => {
@@ -32,21 +32,10 @@ const Home = () => {
 
   const displayData = filteredData.length > 0 || !filteredData ? filteredData : data;
 
-  useEffect(() => {
-    if (noDentistsFound) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'No hay dentistas en esta ciudad',
-            showConfirmButton: false,
-            timer: 2000,
-        });
-    }
-  },[noDentistsFound]);
 
   return (
     <main className={themeState.theme === "dark" ? "dark" : "light"}>
-      <div className="flex flex-wrap gap-4 px-6 justify-center">
-      
+      <div className="flex justify-center gap-4 mb-5">
         <button onClick={sortDentistsByName} className="btn btn-primary">
           Ordenar por Nombre
         </button>
@@ -59,7 +48,9 @@ const Home = () => {
             </option>
           ))}
         </select>
-
+      </div>
+ 
+      <div className="flex flex-wrap gap-4 px-6 justify-center">
         {loading ? (
           Array.from({ length: 10 }, (_, index) => (
             <div key={index} className="flex w-64 flex-col gap-4">
@@ -79,7 +70,7 @@ const Home = () => {
             />
           ))
         ) : (
-          <p>{noDentistsMessage || "No hay dentistas para mostrar."}</p>
+          <p>No hay dentistas para mostrar.</p>
         )}
       </div>
     </main>
@@ -87,3 +78,4 @@ const Home = () => {
 };
 
 export default Home;
+
