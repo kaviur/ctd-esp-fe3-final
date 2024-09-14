@@ -8,6 +8,7 @@ const Home = () => {
   const { dentistState, themeState, sortDentistsByName, filterByCity, resetFilters } = useGlobalContext(); 
   const { data, filteredData, orderedData,noDentistsFound } = dentistState; // Acceder a data y filteredData
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
+  const [selectedCity, setSelectedCity] = useState("");
 
   const cities = [
     "Gwenborough", 
@@ -29,7 +30,14 @@ const Home = () => {
 
   const handleCityChange = (city) => {
     filterByCity(city);
+    setSelectedCity(city);
   };
+
+  const handleResetFilters = () => {
+    setSelectedCity("");  
+    resetFilters();       
+  };
+
 
   const displayData = filteredData.length 
                       ? filteredData 
@@ -55,7 +63,7 @@ const Home = () => {
           Ordenar por Nombre
         </button>
 
-        <select onChange={(e) => handleCityChange(e.target.value)} className="select select-primary">
+        <select value={selectedCity} onChange={(e) => handleCityChange(e.target.value)} className="select select-primary">
           <option value="">Selecciona una ciudad</option>
           {cities.map((city) => (
             <option key={city} value={city}>
@@ -64,7 +72,7 @@ const Home = () => {
           ))}
         </select>
 
-        <button onClick={resetFilters} className="btn btn-secondary">
+        <button onClick={handleResetFilters} className="btn btn-secondary">
           Restablecer Filtros
       </button>
 
