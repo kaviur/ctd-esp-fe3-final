@@ -39,6 +39,11 @@ export const GlobalProvider = ({ children }) => {
     dentistDispatch({ type: "FILTER_BY_CITY", payload: city });
   };
 
+  const resetFilters = () => {
+    dentistDispatch({ type: "RESET_FILTERS" });
+  };
+
+
 
   // Memoizar el valor del contexto para optimizar el rendimiento
   const contextValue = useMemo(() => ({
@@ -47,7 +52,8 @@ export const GlobalProvider = ({ children }) => {
     dentistState,
     dentistDispatch,
     sortDentistsByName,
-    filterByCity
+    filterByCity,
+    resetFilters
   }),[themeState, dentistState]);
 
   return (

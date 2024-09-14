@@ -1,5 +1,6 @@
 export const initialStateDentist = {
     data: [],
+    orderedData: [],
     favs: JSON.parse(localStorage.getItem("favs")) || [],
     filteredData: [],
     noDentistsFound: false
@@ -23,13 +24,14 @@ export const dentistReducer = (state, action) => {
         return { ...state, favs: action.payload };
 
         case "SORT_BY_NAME":
-        const sortedDentists = [...state.data].sort((a, b) => 
-            a.name.localeCompare(b.name)
-        );
-        return {
-            ...state,
-            data: sortedDentists
-        };
+            const dataToSort = state.filteredData.length > 0 ? state.filteredData : state.data;
+            const sortedDentists = [...dataToSort].sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
+            return {
+                ...state,
+                orderedData: sortedDentists
+            };
 
         case "FILTER_BY_CITY":
         const filteredDentists = action.payload 
@@ -42,7 +44,15 @@ export const dentistReducer = (state, action) => {
         return {
             ...state,
             filteredData: filteredDentists,
-            noDentistsFound // Guardar mensaje en el estado
+            noDentistsFound 
+        };
+
+        case "RESET_FILTERS":
+        return {
+            ...state,
+            filteredData:[],
+            orderedData: [],
+            noDentistsFound: false
         };
 
         default:

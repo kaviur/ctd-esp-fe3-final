@@ -4,8 +4,8 @@ import { useGlobalContext } from "../context/GlobalContext";
 import Swal from "sweetalert2"
 
 const Home = () => {
-  const { dentistState, themeState, sortDentistsByName, filterByCity } = useGlobalContext(); 
-  const { data, filteredData, noDentistsFound } = dentistState; // Acceder a data y filteredData
+  const { dentistState, themeState, sortDentistsByName, filterByCity, resetFilters } = useGlobalContext(); 
+  const { data, filteredData, orderedData,noDentistsFound } = dentistState; // Acceder a data y filteredData
   const [loading, setLoading] = useState(true); // Estado para manejar el loading
 
   const cities = [
@@ -30,7 +30,11 @@ const Home = () => {
     filterByCity(city);
   };
 
-  const displayData = filteredData.length > 0 || !filteredData ? filteredData : data;
+  const displayData = filteredData.length 
+                      ? filteredData 
+                      : orderedData.length 
+                        ? orderedData 
+                        : data;
 
   useEffect(() => {
     if (noDentistsFound) {
@@ -41,7 +45,7 @@ const Home = () => {
             timer: 2000,
         });
     }
-  },[noDentistsFound]);
+  },[noDentistsFound, filteredData]);
 
   return (
     <main className={themeState.theme === "dark" ? "dark" : "light"}>
@@ -59,6 +63,11 @@ const Home = () => {
             </option>
           ))}
         </select>
+
+        <button onClick={resetFilters} className="btn btn-secondary">
+          Restablecer Filtros
+      </button>
+
 
         {loading ? (
           Array.from({ length: 10 }, (_, index) => (
@@ -79,7 +88,7 @@ const Home = () => {
             />
           ))
         ) : (
-          <p>{noDentistsMessage || "No hay dentistas para mostrar."}</p>
+          <p>{"No hay dentistas para mostrar."}</p>
         )}
       </div>
     </main>
