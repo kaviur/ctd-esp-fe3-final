@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import { useGlobalContext } from "../context/GlobalContext";
 import Swal from "sweetalert2"
+import toast from "react-hot-toast";
 
 const Home = () => {
   const { dentistState, themeState, sortDentistsByName, filterByCity, resetFilters } = useGlobalContext(); 
@@ -17,13 +18,13 @@ const Home = () => {
     "New York", 
     "Seattle"
   ];
-
+  const notify = () => toast('Here is your toast.');
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); // Cambiar el estado de loading después de 1.5 segundos
+      setLoading(false); 
     }, 1500);
 
-    return () => clearTimeout(timer); // Limpiar el timeout si el componente se desmonta
+    return () => clearTimeout(timer); 
   }, []);
 
   const handleCityChange = (city) => {
@@ -49,8 +50,7 @@ const Home = () => {
 
   return (
     <main className={themeState.theme === "dark" ? "dark" : "light"}>
-      <div className="flex flex-wrap gap-4 px-6 justify-center">
-      
+      <div className="flex justify-center gap-4 mb-5">
         <button onClick={sortDentistsByName} className="btn btn-primary">
           Ordenar por Nombre
         </button>
@@ -69,6 +69,9 @@ const Home = () => {
       </button>
 
 
+      </div>
+ 
+      <div className="flex flex-wrap gap-4 px-6 justify-center">
         {loading ? (
           Array.from({ length: 10 }, (_, index) => (
             <div key={index} className="flex w-64 flex-col gap-4">
@@ -88,7 +91,7 @@ const Home = () => {
             />
           ))
         ) : (
-          <p>{"No hay dentistas para mostrar."}</p>
+          <p>No hay dentistas para mostrar.</p>
         )}
       </div>
     </main>
@@ -96,3 +99,4 @@ const Home = () => {
 };
 
 export default Home;
+
