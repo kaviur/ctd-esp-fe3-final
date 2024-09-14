@@ -4,6 +4,8 @@ const Footer = () => {
   return (
     <footer className="footer bg-base-300 bg-opacity-80 items-center p-4 mt-12">
       <aside className="grid-flow-col items-center">
+        {/* Agregar la imagen aquí */}
+        <img src="../../public/images/DH.png" alt="Logo" className="h-10 w-30 mr-4" />
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
