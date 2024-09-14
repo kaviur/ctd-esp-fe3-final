@@ -2,16 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { ContextProvider } from "../src/Components/utils/global.context";
+import { GlobalProvider } from "../src/context/GlobalContext";  // Actualiza la ruta según el cambio
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ContextProvider>
+      <GlobalProvider>
         <App />
-      </ContextProvider>
+      </GlobalProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
+

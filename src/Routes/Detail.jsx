@@ -1,36 +1,50 @@
-import React from "react";
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchDentistById } from '../services/dentistService';
+import UserDetails from "../Components/UserDetails";
+// Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
-  // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
+  const { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDentistById(id)
+      .then((data) => {
+        setUser(data);  
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);  // Simular un delay
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+        setLoading(false);  // En caso de error, quitar el loading inmediatamente
+      });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex mt-2 w-96 flex-col gap-2 text-center mx-auto">
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+        <div className="skeleton h-10 w-full"></div>
+      </div>
+    );
+  }
+
+  // Si no se encuentra el usuario, mostrar un mensaje de error
+  if (!user) {
+    return <p>Error: Usuario no encontrado</p>;
+  }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="table table-xs">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>company</th>
-            <th>location</th>
-            <th>Last Login</th>
-            <th>Favorite Color</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Littel, Schaden and Vandervort</td>
-            <td>Canada</td>
-            <td>12/16/2020</td>
-            <td>Blue</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="overflow-x-auto flex gap-2">
+      <UserDetails user={user} />
     </div>
   );
 };

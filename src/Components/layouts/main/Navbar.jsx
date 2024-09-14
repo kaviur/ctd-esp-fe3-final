@@ -1,17 +1,17 @@
 import React from "react";
 import { useContext } from "react";
-import "../index.css";
-import { ContextGlobal } from "./utils/global.context";
+import "@/index.css";
+import { useGlobalContext } from "@/context/GlobalContext";
 import { Link } from "react-router-dom";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
-  const { state, dispatch } = useContext(ContextGlobal);
+  const { themeState, themeDispatch } = useGlobalContext();
 
   const toggleTheme = () => {
-    const newTheme = state.theme === "nord" ? "night" : "nord";
-    dispatch({ type: "SET_THEME", payload: newTheme });
+    const newTheme = themeState.theme === "nord" ? "night" : "nord";
+    themeDispatch({ type: "SET_THEME", payload: newTheme });
     document.documentElement.setAttribute("data-theme", newTheme);
   };
 
@@ -52,7 +52,9 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a href="/" className="btn btn-ghost text-xl">daisyUI</a>
+        <a href="/" className="btn btn-ghost text-xl">
+          DH DentalClinic
+        </a>
       </div>
       <div className="navbar-center hidden sm:flex">
         <ul className="menu menu-horizontal gap-2 px-1">
