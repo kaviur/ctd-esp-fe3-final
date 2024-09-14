@@ -1,8 +1,8 @@
 // src/context/GlobalContext.js
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from "react";
-import { getData } from '../services/api';
 import { themeReducer, initialStateTheme } from '../reducers/themeReducer';
 import { dentistReducer, initialStateDentist } from '../reducers/dentistReducer';
+import { fetchDentists } from '../services/dentistService';
 
 
 const GlobalContext = createContext(undefined);
@@ -20,15 +20,23 @@ export const GlobalProvider = ({ children }) => {
 
   // Cargar datos de la API al montar el componente
   useEffect(() => {
-    (async () => {
-      try {
-        const data = await getData("/users");  // Llamada a la API para obtener dentistas
-        dentistDispatch({ type: "SET_DATA", payload: data });
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  },[]);
+    fetchDentists(dentistDispatch); 
+  }, [dentistDispatch]);
+
+
+  const sortDentistsByName = () => {
+    dentistDispatch({ type: "SORT_BY_NAME" });
+  };
+
+
+  const filterByCity = (city) => {
+    dentistDispatch({ type: "FILTER_BY_CITY", payload: city });
+  };
+
+
+  const resetFilters = () => {
+    dentistDispatch({ type: "RESET_FILTERS" });
+  };
 
 
   // Memoizar el valor del contexto para optimizar el rendimiento
@@ -37,6 +45,9 @@ export const GlobalProvider = ({ children }) => {
     themeDispatch,
     dentistState,
     dentistDispatch,
+    sortDentistsByName,
+    filterByCity,
+    resetFilters
   }),[themeState, dentistState]);
 
   return (

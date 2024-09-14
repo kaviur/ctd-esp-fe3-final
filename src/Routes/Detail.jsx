@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getData} from '../services/api';
+import { fetchDentistById } from '../services/dentistService';
 import UserDetails from "../Components/UserDetails";
 // Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 const Detail = () => {
@@ -9,7 +9,7 @@ const Detail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getData(`/users/${id}`)
+    fetchDentistById(id)
       .then((data) => {
         setUser(data);  
         setTimeout(() => {
